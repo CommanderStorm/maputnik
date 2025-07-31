@@ -1,0 +1,127 @@
+@use "vars";
+@use "mixins";
+
+.maputnik-sprite-selector {
+  position: relative;
+  width: 100%;
+}
+
+.maputnik-sprite-selector-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: vars.$color-gray;
+  border: 1px solid vars.$color-midgray;
+  border-top: none;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: vars.$color-midgray vars.$color-gray;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: vars.$color-gray;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: vars.$color-midgray;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: vars.$color-lowgray;
+  }
+}
+
+.maputnik-sprite-selector-item {
+  display: flex;
+  align-items: center;
+  padding: vars.$margin-2;
+  cursor: pointer;
+  border-bottom: 1px solid vars.$color-midgray;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover,
+  &-highlighted {
+    background: vars.$color-midgray;
+  }
+}
+
+.maputnik-sprite-selector-item-image {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: vars.$margin-2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: vars.$color-lowgray;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.maputnik-sprite-selector-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+
+  &-sdf {
+    // SDF sprites might need special treatment
+    filter: brightness(1.2);
+  }
+}
+
+.maputnik-sprite-selector-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: vars.$color-midgray;
+  color: vars.$color-white;
+  font-size: vars.$font-size-5;
+  font-weight: bold;
+}
+
+.maputnik-sprite-selector-item-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.maputnik-sprite-selector-item-name {
+  display: block;
+  color: vars.$color-white;
+  font-size: vars.$font-size-6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.maputnik-sprite-selector-item-badge {
+  display: inline-block;
+  background: vars.$color-lowgray;
+  color: vars.$color-white;
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-top: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.maputnik-sprite-selector-no-results {
+  padding: vars.$margin-2;
+  color: vars.$color-lowgray;
+  font-size: vars.$font-size-6;
+  text-align: center;
+  font-style: italic;
+}
