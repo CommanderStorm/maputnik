@@ -6,17 +6,16 @@
   width: 100%;
 }
 
+.maputnik-sprite-selector-wrapper {
+  width: 100%;
+}
+
 .maputnik-sprite-selector-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
   background: vars.$color-gray;
   border: 1px solid vars.$color-midgray;
   border-top: none;
   max-height: 240px;
   overflow-y: auto;
-  z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   scrollbar-width: thin;
   scrollbar-color: vars.$color-midgray vars.$color-gray;
@@ -75,7 +74,6 @@
   object-fit: contain;
 
   &-sdf {
-    // SDF sprites might need special treatment
     filter: brightness(1.2);
   }
 }

@@ -1,10 +1,9 @@
 import capitalize from "lodash.capitalize";
 import React, { type ReactElement } from "react";
 import type { SpriteData } from "../libs/metadata";
+import FieldSprite, { type FieldSpriteProps } from "./FieldSprite";
 import InputArray, { type FieldArrayProps } from "./InputArray";
-import InputAutocomplete, {
-	type InputAutocompleteProps,
-} from "./InputAutocomplete";
+
 import InputCheckbox, { type InputCheckboxProps } from "./InputCheckbox";
 import InputColor, { type InputColorProps } from "./InputColor";
 import InputDynamicArray, {
@@ -13,9 +12,6 @@ import InputDynamicArray, {
 import InputEnum, { type InputEnumProps } from "./InputEnum";
 import InputFont, { type FieldFontProps } from "./InputFont";
 import InputNumber, { type InputNumberProps } from "./InputNumber";
-import InputSpriteSelector, {
-	type InputSpriteSelectorProps,
-} from "./InputSpriteSelector";
 import InputString, { type InputStringProps } from "./InputString";
 
 const iconProperties = [
@@ -105,26 +101,15 @@ export default class SpecField extends React.Component<SpecFieldProps> {
 			case "string":
 				if (iconProperties.indexOf(this.props.fieldName!) >= 0) {
 					const spriteData = this.props.fieldSpec?.spriteData || [];
+					const fallbackOptions = (this.props.fieldSpec?.values || []) as string[];
 
-					// Check if value is an expression - if so, use regular string input
-					const isExpression = Array.isArray(this.props.value);
-
-					if (spriteData.length > 0 && !isExpression) {
-						return (
-							<InputSpriteSelector
-								{...(commonProps as Omit<InputSpriteSelectorProps, "sprites">)}
-								sprites={spriteData}
-							/>
-						);
-					} else {
-						const options = this.props.fieldSpec?.values || [];
-						return (
-							<InputAutocomplete
-								{...(commonProps as Omit<InputAutocompleteProps, "options">)}
-								options={options.map((f) => [f, f])}
-							/>
-						);
-					}
+					return (
+						<FieldSprite
+							{...(commonProps as FieldSpriteProps)}
+							sprites={spriteData}
+							fallbackOptions={fallbackOptions}
+						/>
+					);
 				} else {
 					return <InputString {...(commonProps as InputStringProps)} />;
 				}
